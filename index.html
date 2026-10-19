@@ -47,6 +47,12 @@
                 <label for="ano">Ano de lançamento:</label>
                 <input type="number" id="ano" name="ano" min="1888" required>
 
+                <label for="duracao">Duração do filme (minutos):</label>
+                <input type="number" id="duracao" name="duracao" min="1">
+
+                <label for="temporadas">Número de temporadas:</label>
+                <input type="number" id="temporadas" name="temporadas" min="1">
+
                 <label for="responsavel">Diretor ou criador:</label>
                 <input type="text" id="responsavel" name="responsavel">
 
@@ -94,6 +100,16 @@
                     <option value="acao">Ação</option>
                 </select>
 
+                
+                <label for="filtro-status">Filtrar por status:</label>
+                <select id="filtro-status" name="filtro-status">
+                    <option value="todos">Todos os status</option>
+                    <option value="quero-assistir">Quero assistir</option>
+                    <option value="assistindo">Assistindo</option>
+                    <option value="finalizado">Finalizado</option>
+                </select>
+
+
                 <label for="ordenacao">Ordenar por:</label>
                 <select id="ordenacao" name="ordenacao">
                     <option value="titulo">Título</option>
@@ -119,6 +135,13 @@
                     <p>Minha nota: 9,5</p>
                     <p>Status: Finalizado</p>
 
+                    <section>
+                        <h5>Detalhes da obra</h5>
+                        <p><strong>Diretor:</strong> Christopher Nolan</p>
+                        <p><strong>Duração:</strong> 169 minutos</p>
+                        <p><strong>Sinopse:</strong> Um grupo de astronautas viaja pelo espaço em busca de um novo lar para a humanidade.</p>
+                    </section>
+
                     <button type="button">Ver detalhes</button>
                     <button type="button">Editar</button>
                     <button type="button">Excluir</button>
@@ -135,6 +158,13 @@
                     <p>Ano: 2008</p>
                     <p>Minha nota: 9,8</p>
                     <p>Status: Quero assistir</p>
+
+                    <section>
+                        <h5>Detalhes da obra</h5>
+                        <p><strong>Criador:</strong> Vince Gilligan</p>
+                        <p><strong>Temporadas:</strong> 5</p>
+                        <p><strong>Sinopse:</strong> Um professor de química passa a se envolver com a fabricação de drogas após receber um diagnóstico grave.</p>
+                    </section>
 
                     <button type="button">Ver detalhes</button>
                     <button type="button">Editar</button>
