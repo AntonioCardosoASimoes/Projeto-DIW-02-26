@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineList - Catálogo de Filmes e Séries</title>
+</head>
+<body>
+
+    <header>
+        <h1>CineList</h1>
+        <p>Seu espaço para organizar filmes e séries.</p>
+
+        <nav>
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#cadastro">Cadastrar obra</a></li>
+                <li><a href="#catalogo">Meu catálogo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio">
+            <h2>Bem-vindo ao CineList!</h2>
+            <p>Cadastre, organize e acompanhe os filmes e séries que você deseja assistir.</p>
+        </section>
+
+        <section id="cadastro">
+            <h2>Cadastrar obra</h2>
+
+            <form>
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" required>
+
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="">Selecione</option>
+                    <option value="filme">Filme</option>
+                    <option value="serie">Série</option>
+                </select>
+
+                <label for="genero">Gênero:</label>
+                <input type="text" id="genero" name="genero" required>
+
+                <label for="ano">Ano de lançamento:</label>
+                <input type="number" id="ano" name="ano" min="1888" required>
+
+                <label for="responsavel">Diretor ou criador:</label>
+                <input type="text" id="responsavel" name="responsavel">
+
+                <label for="nota">Minha nota (0 a 10):</label>
+                <input type="number" id="nota" name="nota" min="0" max="10" step="0.1">
+
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="">Selecione</option>
+                    <option value="quero-assistir">Quero assistir</option>
+                    <option value="assistindo">Assistindo</option>
+                    <option value="finalizado">Finalizado</option>
+                </select>
+
+                <label for="sinopse">Sinopse:</label>
+                <textarea id="sinopse" name="sinopse" rows="4"></textarea>
+
+                <label for="imagem">URL da imagem:</label>
+                <input type="url" id="imagem" name="imagem">
+
+                <button type="submit">Cadastrar obra</button>
+            </form>
+        </section>
+
+        <section id="catalogo">
+            <h2>Meu catálogo</h2>
+
+            <form>
+                <label for="pesquisa">Pesquisar por título:</label>
+                <input type="search" id="pesquisa" name="pesquisa"
+                    placeholder="Digite o nome de um filme ou série">
+
+                <label for="filtro-tipo">Filtrar por tipo:</label>
+                <select id="filtro-tipo" name="filtro-tipo">
+                    <option value="todos">Todos</option>
+                    <option value="filme">Filmes</option>
+                    <option value="serie">Séries</option>
+                </select>
+
+                <label for="filtro-genero">Filtrar por gênero:</label>
+                <select id="filtro-genero" name="filtro-genero">
+                    <option value="todos">Todos os gêneros</option>
+                    <option value="ficcao">Ficção científica</option>
+                    <option value="drama">Drama</option>
+                    <option value="acao">Ação</option>
+                </select>
+
+                <label for="ordenacao">Ordenar por:</label>
+                <select id="ordenacao" name="ordenacao">
+                    <option value="titulo">Título</option>
+                    <option value="ano">Ano de lançamento</option>
+                    <option value="nota">Minha nota</option>
+                </select>
+
+                <button type="button">Pesquisar</button>
+            </form>
+
+            <section>
+                <h3>Filmes e séries cadastrados</h3>
+
+                <article>
+                    <img src="https://placehold.co/160x230?text=Interestelar"
+                        alt="Imagem ilustrativa do filme Interestelar"
+                        width="160">
+
+                    <h4>Interestelar</h4>
+                    <p>Tipo: Filme</p>
+                    <p>Gênero: Ficção científica</p>
+                    <p>Ano: 2014</p>
+                    <p>Minha nota: 9,5</p>
+                    <p>Status: Finalizado</p>
+
+                    <button type="button">Ver detalhes</button>
+                    <button type="button">Editar</button>
+                    <button type="button">Excluir</button>
+                </article>
+
+                <article>
+                    <img src="https://placehold.co/160x230?text=Breaking+Bad"
+                        alt="Imagem ilustrativa da série Breaking Bad"
+                        width="160">
+
+                    <h4>Breaking Bad</h4>
+                    <p>Tipo: Série</p>
+                    <p>Gênero: Drama e crime</p>
+                    <p>Ano: 2008</p>
+                    <p>Minha nota: 9,8</p>
+                    <p>Status: Quero assistir</p>
+
+                    <button type="button">Ver detalhes</button>
+                    <button type="button">Editar</button>
+                    <button type="button">Excluir</button>
+                </article>
+            </section>
+        </section>
+
+        <aside>
+            <h2>Minha lista</h2>
+            <p>Organize suas próximas sessões de cinema e maratonas.</p>
+        </aside>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CineList - Catálogo de Filmes e Séries.</p>
+    </footer>
+
+</body>
+</html>
