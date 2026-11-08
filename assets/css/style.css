@@ -172,3 +172,39 @@ button {
 button:hover {
     background-color: var(--cor-destaque-hover);
 }
+
+/* Layout do formulário de cadastro */
+.formulario-cadastro {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+/* Organiza cada campo */
+.formulario-cadastro label {
+    align-self: end;
+}
+
+.formulario-cadastro input,
+.formulario-cadastro select,
+.formulario-cadastro textarea {
+    margin-top: -18px;
+}
+
+/* Botão de cadastro ocupa a largura disponível */
+.formulario-cadastro button {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+.formulario-cadastro label[for="sinopse"] {
+    align-self: start;
+    margin-top: 12px;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 600px) {
+    .formulario-cadastro {
+        grid-template-columns: 1fr;
+    }
+}
