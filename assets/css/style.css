@@ -202,9 +202,79 @@ button:hover {
     margin-top: 12px;
 }
 
+
+/* Catálogo de obras */
+.lista-obras {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.lista-obras h3 {
+    grid-column: 1 / -1;
+}
+
+/* Cartões dos filmes e séries */
+.cartao-obra {
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.cartao-obra:hover {
+    border-color: var(--cor-destaque);
+    transform: translateY(-4px);
+}
+
+/* Imagens dos cartões */
+.cartao-obra img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Informações das obras */
+.cartao-obra h4 {
+    font-size: 22px;
+    margin: 4px 0;
+    color: var(--cor-texto);
+}
+
+.cartao-obra p {
+    margin: 0;
+}
+
+/* Detalhes da obra */
+.cartao-obra section {
+    background-color: var(--cor-superficie-hover);
+    border-radius: 8px;
+    padding: 14px;
+}
+
+.cartao-obra h5 {
+    font-size: 16px;
+    margin: 0 0 10px;
+}
+
+/* Botões dos cartões */
+.cartao-obra button {
+    width: 100%;
+    margin-top: 4px;
+}
+
+
 /* Ajustes para telas menores */
 @media (max-width: 600px) {
     .formulario-cadastro {
+        grid-template-columns: 1fr;
+    }
+    .lista-obras {
         grid-template-columns: 1fr;
     }
 }
