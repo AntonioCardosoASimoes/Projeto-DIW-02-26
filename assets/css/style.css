@@ -321,6 +321,9 @@ a:focus-visible {
     color: white;
 }
 
+.cartao-obra section[hidden] {
+    display: none;
+}
 
 /* Responsividade da pesquisa */
 @media (max-width: 800px) {

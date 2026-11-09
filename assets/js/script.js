@@ -1,5 +1,6 @@
 const formulario = document.querySelector(".formulario-cadastro");
 let obras = JSON.parse(localStorage.getItem("obras")) || [];
+let obraEmEdicao = null;
 
 function salvarObras() {
     localStorage.setItem("obras", JSON.stringify(obras));
@@ -48,16 +49,86 @@ function mostrarObras() {
         const botaoDetalhes = document.createElement("button");
         botaoDetalhes.type = "button";
         botaoDetalhes.textContent = "Ver detalhes";
+
+        const detalhes = document.createElement("section");
+        detalhes.hidden = true;
+
+        const responsavel = document.createElement("p");
+        responsavel.textContent = (obra.tipo === "filme" ? "Diretor: " : "Criador: ") + (obra.responsavel || "Não informado");
+        detalhes.appendChild(responsavel);
+
+        const tempo = document.createElement("p");
+
+        if (obra.tipo === "filme") {
+            tempo.textContent = "Duração: " + (obra.duracao === null ? "Não informada" : obra.duracao + " minutos");
+        } else {
+            tempo.textContent = "Temporadas: " + (obra.temporadas === null ? "Não informado" : obra.temporadas);
+        }
+
+        detalhes.appendChild(tempo);
+
+        const sinopse = document.createElement("p");
+        sinopse.textContent = "Sinopse: " + (obra.sinopse || "Não informada");
+        detalhes.appendChild(sinopse);
+
+        botaoDetalhes.addEventListener("click", function() {
+            detalhes.hidden = !detalhes.hidden;
+
+            if (detalhes.hidden) {
+                botaoDetalhes.textContent = "Ver detalhes";
+            } else {
+                botaoDetalhes.textContent = "Ocultar detalhes";
+            }
+        });
+
         cartao.appendChild(botaoDetalhes);
+        cartao.appendChild(detalhes);
 
         const botaoEditar = document.createElement("button");
         botaoEditar.type = "button";
         botaoEditar.textContent = "Editar";
+
+        botaoEditar.addEventListener("click", function() {
+            obraEmEdicao = obra;
+
+            document.getElementById("titulo").value = obra.titulo;
+            document.getElementById("tipo").value = obra.tipo;
+            document.getElementById("genero").value = obra.genero;
+            document.getElementById("ano").value = obra.ano;
+            document.getElementById("duracao").value = obra.duracao ?? "";
+            document.getElementById("temporadas").value = obra.temporadas ?? "";
+            document.getElementById("responsavel").value = obra.responsavel;
+            document.getElementById("nota").value = obra.nota ?? "";
+            document.getElementById("status").value = obra.status;
+            document.getElementById("sinopse").value = obra.sinopse;
+            document.getElementById("imagem").value = obra.imagem;
+
+            formulario.querySelector("button").textContent = "Salvar alterações";
+
+            document.getElementById("cadastro").scrollIntoView({ behavior: "smooth" });
+        });
+
         cartao.appendChild(botaoEditar);
 
         const botaoExcluir = document.createElement("button");
         botaoExcluir.type = "button";
         botaoExcluir.textContent = "Excluir";
+
+        botaoExcluir.addEventListener("click", function() {
+            const confirmar = confirm("Deseja realmente excluir " + obra.titulo + "?");
+
+            if (confirmar) {
+                obras = obras.filter(function(item) {
+                    return item !== obra;
+                });
+
+                salvarObras();
+                mostrarObras();
+
+                alert("Obra excluída com sucesso!");
+            }
+        });
+
         cartao.appendChild(botaoExcluir);
 
         listaObras.appendChild(cartao);
@@ -93,11 +164,18 @@ formulario.addEventListener("submit", function(evento) {
     imagem: imagem
     };
 
-    obras.push(obra);
+    if (obraEmEdicao === null) {
+        obras.push(obra);
+    } else {
+        const indice = obras.indexOf(obraEmEdicao);
+        obras[indice] = obra;
+        obraEmEdicao = null;
+    }
 
     salvarObras();
     mostrarObras();
 
     formulario.reset();
+    formulario.querySelector("button").textContent = "Cadastrar obra";
 });
 mostrarObras();
