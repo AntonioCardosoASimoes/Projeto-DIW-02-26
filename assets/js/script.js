@@ -1,5 +1,9 @@
 const formulario = document.querySelector(".formulario-cadastro");
-let obras = [];
+let obras = JSON.parse(localStorage.getItem("obras")) || [];
+
+function salvarObras() {
+    localStorage.setItem("obras", JSON.stringify(obras));
+}
 
 const listaObras = document.querySelector(".lista-obras");
 
@@ -91,7 +95,9 @@ formulario.addEventListener("submit", function(evento) {
 
     obras.push(obra);
 
+    salvarObras();
     mostrarObras();
 
     formulario.reset();
 });
+mostrarObras();
