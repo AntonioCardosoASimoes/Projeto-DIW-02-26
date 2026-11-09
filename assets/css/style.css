@@ -288,6 +288,40 @@ button:hover {
     min-height: 44px;
 }
 
+
+/* Estados dos botões */
+button:hover {
+    background-color: var(--cor-destaque-hover);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+button:focus-visible {
+    outline: 2px solid var(--cor-texto);
+    outline-offset: 3px;
+}
+
+/* Estados dos links */
+a:focus-visible {
+    outline: 2px solid var(--cor-destaque);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* Destaque das informações importantes */
+.cartao-obra p strong {
+    color: var(--cor-texto);
+}
+
+/* Seleção de texto */
+::selection {
+    background-color: var(--cor-destaque);
+    color: white;
+}
+
+
 /* Responsividade da pesquisa */
 @media (max-width: 800px) {
     .formulario-pesquisa {
