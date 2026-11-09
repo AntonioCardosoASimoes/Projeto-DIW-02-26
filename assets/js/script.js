@@ -7,13 +7,51 @@ function salvarObras() {
 }
 
 const listaObras = document.querySelector(".lista-obras");
+const formularioPesquisa = document.querySelector(".formulario-pesquisa");
+let textoPesquisa = "";
+let filtroTipo = "todos";
+let filtroGenero = "todos";
+let filtroStatus = "todos";
+let ordenacao = "titulo";
 
 function mostrarObras() {
     listaObras.querySelectorAll(".cartao-obra").forEach(function(cartao) {
         cartao.remove();
     });
 
-    for (let obra of obras) {
+    const obrasFiltradas = obras.filter(function(obra) {
+        const correspondePesquisa = obra.titulo.toLowerCase().includes(textoPesquisa);
+
+        const correspondeTipo = filtroTipo === "todos" || obra.tipo === filtroTipo;
+
+        const correspondeGenero = filtroGenero === "todos" ||
+            obra.genero.toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .includes(filtroGenero);
+
+        const correspondeStatus = filtroStatus === "todos" || obra.status === filtroStatus;
+
+        return correspondePesquisa && correspondeTipo &&
+               correspondeGenero && correspondeStatus;
+    });
+    obrasFiltradas.sort(function(a, b) {
+        if (ordenacao === "titulo") {
+            return a.titulo.localeCompare(b.titulo);
+        }
+
+        if (ordenacao === "ano") {
+            return a.ano - b.ano;
+        }
+
+        if (ordenacao === "nota") {
+            return (b.nota ?? -1) - (a.nota ?? -1);
+        }
+
+        return 0;
+    });
+
+    for (let obra of obrasFiltradas) {
         const cartao = document.createElement("article");
         cartao.className = "cartao-obra";
 
@@ -178,4 +216,17 @@ formulario.addEventListener("submit", function(evento) {
     formulario.reset();
     formulario.querySelector("button").textContent = "Cadastrar obra";
 });
+
+formularioPesquisa.querySelector("button").addEventListener("click", function() {
+    textoPesquisa = document.getElementById("pesquisa").value.trim().toLowerCase();
+
+    filtroTipo = document.getElementById("filtro-tipo").value;
+    filtroGenero = document.getElementById("filtro-genero").value;
+    filtroStatus = document.getElementById("filtro-status").value;
+
+    ordenacao = document.getElementById("ordenacao").value;
+
+    mostrarObras();
+});
+
 mostrarObras();
