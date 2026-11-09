@@ -230,3 +230,117 @@ formularioPesquisa.querySelector("button").addEventListener("click", function() 
 });
 
 mostrarObras();
+
+const botaoBuscaApi = document.getElementById("botao-busca-api");
+const campoBuscaApi = document.getElementById("pesquisa-api");
+const resultadosApi = document.getElementById("resultados-api");
+
+botaoBuscaApi.addEventListener("click", async function() {
+    const pesquisa = campoBuscaApi.value.trim();
+
+    if (pesquisa === "") {
+        resultadosApi.textContent = "Digite o nome de um filme ou série.";
+        return;
+    }
+
+    resultadosApi.textContent = "Buscando filmes e séries...";
+
+    const endereco = "https://cinelist-api.antoniocardososimoes.workers.dev/?pesquisa=" +
+        encodeURIComponent(pesquisa);
+
+    try {
+        const resposta = await fetch(endereco);
+
+        if (!resposta.ok) {
+            throw new Error("Erro na consulta à API");
+        }
+
+        const dados = await resposta.json();
+
+        mostrarResultadosApi(dados);
+
+    } catch (erro) {
+        resultadosApi.textContent = "Não foi possível realizar a pesquisa.";
+        console.log(erro);
+    }
+});
+
+function mostrarResultadosApi(dados) {
+    resultadosApi.innerHTML = "";
+
+    if (dados.length === 0) {
+        resultadosApi.textContent = "Nenhuma obra encontrada.";
+        return;
+    }
+
+    for (let obra of dados) {
+        const cartao = document.createElement("div");
+        cartao.className = "resultado-api";
+
+        const imagem = document.createElement("img");
+
+        if (obra.poster_path) {
+            imagem.src = "https://image.tmdb.org/t/p/w300" + obra.poster_path;
+        } else {
+            imagem.src = "https://placehold.co/160x230?text=Sem+Imagem";
+        }
+
+        imagem.alt = "Pôster de " + (obra.title || obra.name);
+
+        cartao.appendChild(imagem);
+
+        const titulo = document.createElement("h3");
+        titulo.textContent = obra.title || obra.name;
+
+        const ano = document.createElement("p");
+        const data = obra.release_date || obra.first_air_date || "";
+        ano.textContent = "Ano: " + (data ? data.substring(0, 4) : "Não informado");
+
+        const tipo = document.createElement("p");
+        tipo.textContent = "Tipo: " +
+            (obra.media_type === "movie" ? "Filme" : "Série");
+
+        cartao.appendChild(titulo);
+        cartao.appendChild(ano);
+        cartao.appendChild(tipo);
+
+        const botaoAdicionar = document.createElement("button");
+        botaoAdicionar.type = "button";
+        botaoAdicionar.textContent = "Adicionar ao CineList";
+        botaoAdicionar.addEventListener("click", function() {
+            const tituloObra = obra.title || obra.name;
+            const dataObra = obra.release_date || obra.first_air_date || "";
+
+            obraEmEdicao = null;
+
+            document.getElementById("titulo").value = tituloObra;
+            document.getElementById("tipo").value =
+                obra.media_type === "movie" ? "filme" : "serie";
+
+            document.getElementById("genero").value = "";
+            document.getElementById("ano").value =
+                dataObra ? dataObra.substring(0, 4) : "";
+
+            document.getElementById("duracao").value = "";
+            document.getElementById("temporadas").value = "";
+            document.getElementById("responsavel").value = "";
+            document.getElementById("nota").value = "";
+            document.getElementById("status").value = "quero-assistir";
+            document.getElementById("sinopse").value = obra.overview || "";
+
+            document.getElementById("imagem").value = obra.poster_path
+                ? "https://image.tmdb.org/t/p/w500" + obra.poster_path
+                : "";
+
+            formulario.querySelector("button").textContent = "Cadastrar obra";
+
+            document.getElementById("cadastro").scrollIntoView({
+                behavior: "smooth"
+            });
+        });
+
+        cartao.appendChild(botaoAdicionar);
+
+        resultadosApi.appendChild(cartao);
+    }
+}

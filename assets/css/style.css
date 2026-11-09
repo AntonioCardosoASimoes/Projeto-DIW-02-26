@@ -351,3 +351,94 @@ a:focus-visible {
         grid-template-columns: 1fr;
     }
 }
+
+#busca-api {
+    background-color: #1b1b1b;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+#busca-api h2 {
+    color: #4da6ff;
+    margin-bottom: 15px;
+}
+
+#busca-api p {
+    margin-bottom: 20px;
+}
+
+.formulario-api {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+#pesquisa-api {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #292929;
+    color: white;
+    font-size: 16px;
+}
+
+#botao-busca-api {
+    padding: 12px 20px;
+    background-color: #4da6ff;
+    color: #111;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#botao-busca-api:hover {
+    background-color: #80bfff;
+}
+
+#resultados-api {
+    margin-top: 20px;
+}
+
+.resultado-api {
+    background-color: #292929;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 12px;
+}
+
+.resultado-api h3 {
+    color: #4da6ff;
+    margin-bottom: 10px;
+}
+
+.resultado-api p {
+    margin-bottom: 5px;
+}
+
+.resultado-api img {
+    width: 150px;
+    height: 225px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.resultado-api button {
+    background-color: #4da6ff;
+    color: #111;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.resultado-api button:hover {
+    background-color: #80bfff;
+}
